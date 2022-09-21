@@ -16,9 +16,12 @@ from ..data.voc import voc_classes
 
 
 def do_python_eval(data_path, output_dir='output', use_07=True):
-    cachedir = os.path.join(data_path, 'VOC2007', 'annotations_cache')
-    annopath = os.path.join(data_path, 'VOC2007', 'Annotations', '%s.xml')
-    imgsetpath = os.path.join(data_path, 'VOC2007', 'ImageSets', 'Main', 'test.txt')
+    # cachedir = os.path.join(data_path, 'VOC2007', 'annotations_cache')
+    # annopath = os.path.join(data_path, 'VOC2007', 'Annotations', '%s.xml')
+    # imgsetpath = os.path.join(data_path, 'VOC2007', 'ImageSets', 'Main', 'test.txt')
+    cachedir = os.path.join(data_path, 'VOC2012', 'annotations_cache')
+    annopath = os.path.join(data_path, 'VOC2012', 'Annotations', '%s.xml')
+    imgsetpath = os.path.join(data_path, 'VOC2012', 'ImageSets', 'Main', 'test.txt')
 
     aps = []
     # The PASCAL VOC metric changed in 2010

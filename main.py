@@ -55,6 +55,8 @@ def get_args():
                         help='Further restrict the number of predictions to parse')
     parser.add_argument('--sigma-decay', type=float, default=0,
                         help='Sigma decay rate for each epoch.')
+    parser.add_argument('--use_cuda', type=str, default=False,
+                        help='Use GPU')
 
     args = parser.parse_args()
     return args
@@ -109,6 +111,16 @@ def get_trainer(args, model, dataloaders, writer):
 
 if __name__ == '__main__':
     args = get_args()
+
+    # For TinyVOC
+    args.batch_size = 2
+    args.dataset_path = r"C:\Users\mkm_i\PycharmProjects\innov-active-learning\media\disk_drive\datasets\VOCdevkit"
+    args.dataset='VOC2012'
+    args.query_size=[2,4,6]
+    args.lr_steps=[8,9,10]
+    args.num_epoch=1
+    args.max_iter=3
+
     args.save_path += args.task + '/'
     args.milestone = list(map(int, args.milestone.split(',')))
 
@@ -124,8 +136,12 @@ if __name__ == '__main__':
     print('=' * 90)
     result_file.write('=' * 40 + '\n')
 
-    args.device = torch.device(f"cuda:{args.gpu_id}" if torch.cuda.is_available() else "cpu")
-    torch.cuda.set_device(args.device)  # change allocation of current GPU
+    if args.use_cuda:
+        args.device = torch.device(f"cuda:{args.gpu_id}" if torch.cuda.is_available() else "cpu")
+        torch.cuda.set_device(args.device)  # change allocation of current GPU
+    else:
+        args.device = torch.device("cpu")
+
     print(f'Current cuda device: {torch.cuda.current_device()}')
 
     torch.set_default_tensor_type('torch.FloatTensor')

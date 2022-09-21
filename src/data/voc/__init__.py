@@ -40,7 +40,8 @@ def get_voc_data(args):
                                         transform=BaseTransform(300, voc_means),
                                         target_transform=VOCAnnotationTransform())
     dataset['test'] = VOCDetection(root=args.dataset_path,
-                                   image_sets=[('2007', 'test')],
+                                   #image_sets=[('2007', 'test')],
+                                   image_sets=[('2012', 'test')],
                                    transform=BaseTransform(300, voc_means),
                                    target_transform=VOCAnnotationTransform())
     return dataset

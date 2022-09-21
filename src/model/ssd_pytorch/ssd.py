@@ -116,7 +116,7 @@ class SSD(nn.Module):
             #                  self.num_classes)),                # conf preds
             #     self.priors.type(type(x.data))                  # default boxes
             # )
-            if not self.priors.is_cuda:
+            if self.priors.is_cuda:
                 output = self.detect.apply(self.num_classes, 0, 200, 0.01, 0.45,
                                            loc.view(loc.size(0), -1, 4),  # loc preds
                                            self.softmax(conf.view(conf.size(0), -1,
