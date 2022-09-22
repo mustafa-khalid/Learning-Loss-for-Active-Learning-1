@@ -55,7 +55,7 @@ def get_args():
                         help='Further restrict the number of predictions to parse')
     parser.add_argument('--sigma-decay', type=float, default=0,
                         help='Sigma decay rate for each epoch.')
-    parser.add_argument('--use_cuda', type=str, default=False,
+    parser.add_argument('--use_cuda', type=str, default=True,
                         help='Use GPU')
 
     args = parser.parse_args()
